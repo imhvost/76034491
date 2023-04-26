@@ -15,13 +15,18 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script>
-  function changeMenu(file) {
-    $.get(file, function(html) {
-      html = $('<div>' + html + '</div>');
-      html.find('script').remove();
-      $('#content').append(html);
+   function changeMenu(file) {
+    $('#content').empty();
+    if (window.contentCode) {
+      window.contentCode.destroy();
+      delete window.contentCode;
+    }
+    $('#content').load(file,function() {
+      if (window.contentCode) {
+       window.contentCode.init();
+      }
     })
-  }
+   }
   </script>
   
 <body>
