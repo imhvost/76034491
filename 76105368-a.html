@@ -1,9 +1,21 @@
 This is A
 <script>
-  //let x=10;
-  setInterval(() => {
-    //code for A
-    console.log("I am interval A 1st line")
-    console.log("I am interval A 2nd line")
-  }, 1000);
+
+(function (){
+  class ContentCode {
+    constructor() {
+      this.intervals = [];
+    }
+    init() {
+      this.intervals.push(setInterval(() => console.log('A1'), 1000));
+      this.intervals.push(setInterval(() => console.log('A2'), 1000));
+    }
+    destroy() {
+      this.intervals.map(el => clearInterval(el));
+    }
+  }
+
+  window.contentCode = new ContentCode;
+})();
+  
 </script>
