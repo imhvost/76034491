@@ -1,12 +1,21 @@
 This is B
 <script>
-  //let x=10;
-  setInterval(() => {
-    //code for B
-    console.log("I am interval B 1st line")
-    console.log("I am interval B 2nd line")
-  }, 1000);
-</script>
-<script>
-  alert('Hello!')
+
+(function (){
+  class ContentCode {
+    constructor() {
+      this.intervals = [];
+    }
+    init() {
+      this.intervals.push(setInterval(() => console.log('B1'), 1000));
+      this.intervals.push(setInterval(() => console.log('B2'), 1000));
+    }
+    destroy() {
+      this.intervals.map(el => clearInterval(el));
+    }
+  }
+  
+  window.contentCode = new ContentCode;
+})();
+  
 </script>
