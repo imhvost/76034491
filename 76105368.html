@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html  lang="en">
+
+<head>
+  <title>76105368</title>
+  <meta name="viewport" content="width=device-width">
+  <meta charset="UTF-8">
+</head>
+<body>
+  
+  <button onclick="changeMenu('a.html')">Load A</button>
+  <button onclick="changeMenu('b.html')">Load B</button>
+
+  <div id="content"></div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script>
+  function changeMenu(file) {
+    $.get(file, function(html) {
+      html = $('<div>' + html + '</div>');
+      html.find('script').remove();
+      $('#content').append(html);
+    })
+  }
+  </script>
+  
+<body>
+
+</html>
