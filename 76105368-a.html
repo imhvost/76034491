@@ -1,0 +1,25 @@
+This is A a
+<script>
+
+(function (){
+  class ContentCode {
+    constructor() {
+      this.intervals = [];
+		this.events = [];
+    }
+    init() {
+      this.intervals.push( setInterval(() => console.log('A1'), 1000) );
+      this.intervals.push( setInterval(() => console.log('A2'), 1000) );
+		
+		this.events.push( $('#content').on( 'click', () => console.log('click A') ) );
+    }
+    destroy() {
+      this.intervals.map(el => clearInterval(el));
+      this.events.map( el => Object.keys( $._data( $(el)[0], 'events' ) ).map( eventType => el.off(eventType) ) );
+    }
+  }
+
+  window.contentCode = new ContentCode;
+})();
+  
+</script>
