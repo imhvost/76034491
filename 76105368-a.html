@@ -8,10 +8,10 @@ This is A a
 		this.events = [];
     }
     init() {
-      this.intervals.push( setInterval(() => console.log('A1'), 1000) );
-      this.intervals.push( setInterval(() => console.log('A2'), 1000) );
+      this.intervals.push( setInterval( () => console.log('A1'), 1000 ) );
+      this.intervals.push( setInterval( () => console.log('A2'), 1000 ) );
 		
-      this.events.push( $('#content').on( 'click', () => console.log('click A') ) );
+		this.events.push( $('#content').on( 'click', () => console.log('click A') ) );
     }
     destroy() {
       this.intervals.map(el => clearInterval(el));
