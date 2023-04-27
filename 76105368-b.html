@@ -11,11 +11,11 @@ This is B
       this.intervals.push( setInterval(() => console.log('B1'), 1000) );
       this.intervals.push( setInterval(() => console.log('B2'), 1000) );
 		
-		this.events.push( $('#content').on( 'click', () => console.log('click B') ) );
+      this.events.push( $('#content').on( 'click', () => console.log('click B') ) );
     }
     destroy() {
       this.intervals.map(el => clearInterval(el));
-		this.events.map( el => Object.keys( $._data( $(el)[0], 'events' ) ).map( eventType => el.off(eventType) ) );
+      this.events.map( el => Object.keys( $._data( $(el)[0], 'events' ) ).map( eventType => el.off(eventType) ) );
     }
   }
   
