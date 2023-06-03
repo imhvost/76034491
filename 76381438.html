@@ -5,16 +5,14 @@
   <style>body{ margin: 0; padding: 0; font-family: sans-serif;} #page{ display: flex; }</style>
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </head>
-
 <body id="Parent">
   <div id="page">
-    <iframe id="sidebar" src="76381438-sidebar.html"></iframe>
-
+    <iframe id="sidebar" src="sidebar.html"></iframe>
     <div id="main">
       <h2>I am the parent</h2>
       <code class="result"></code>
     </div>
   </div>
-  <script>$('.result').html('$("body").attr("id"): <b>' + $('body').attr('id') + '</b>');</script>
+  <script>$('.result').html(`bodyID: <b>${$('body').attr('id')}</b>`);</script>
 </body>
 </html>
