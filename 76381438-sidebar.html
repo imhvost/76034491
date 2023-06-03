@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Sidebar</title>
-	<style>body{font-family: sans-serif;}</style>
+  <title>Sidebar</title>
+  <style>body{font-family: sans-serif;}</style>
 </head>
 <body id="Sidebar">
-	<h2>I am the sidebar iFrame</h2>
-	<code class="result"></code>
-	<script>
-		const $jq = window.parent.$jq;
-		const $ = (selector) => $jq(selector, document);
-		const theId = $("body").attr("id");
-		const theIdithContext = $('body').attr("id");
-		const el = document.querySelector('code');
-		el.innerHTML +=('$jq("body").attr("id"): <b>' + theId + '</b><br><br>');
-		el.innerHTML +=('$jq("body", document).attr("id"): <b>' + theIdithContext + '</b>');
-	</script>
+  <h2>I am the sidebar iFrame</h2>
+  <code class="result"></code>
+  <script>
+    const $ = (selector) => window.parent.$(selector, document);
+    const theId = $("body").attr("id");
+    const theIdithContext = $('body').attr("id");
+    const el = document.querySelector('code');
+    el.innerHTML +=('$("body").attr("id"): <b>' + theId + '</b><br><br>');
+    el.innerHTML +=('$"body", document).attr("id"): <b>' + theIdithContext + '</b>');
+  </script>
 </body>
 </html>
