@@ -1,11 +1,13 @@
+</html>
 <!DOCTYPE html>
 <html>
 <head>
   <title>Parent</title>
   <style>body{ margin: 0; padding: 0; font-family: sans-serif;} #page{ display: flex; }</style>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </head>
 
-<body>
+<body id="Parent">
   <div id="page">
     <iframe id="sidebar" src="76381438-sidebar.html"></iframe>
 
@@ -14,9 +16,6 @@
       <code class="result"></code>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-  <script>$jq = jQuery;</script>
-  <script>$('.result').html('$jq("body").attr("id"): <b>' + $jq("body").attr("id") + '</b>');</script>
+  <script>$('.result').html('$("body").attr("id"): <b>' + $('body').attr('id') + '</b>');</script>
 </body>
-
 </html>
