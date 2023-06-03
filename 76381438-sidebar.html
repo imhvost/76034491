@@ -8,11 +8,11 @@
   <h2>I am the sidebar iFrame</h2>
   <code class="result"></code>
   <script>
-    const $Parent = window.parent.$;
-    const $ = (selector) => window.parent.$(selector, document);
-    Object.setPrototypeOf( $, $Parent );
+    const jQuery = window.parent.$;
+    const $ = (selector) => jQuery(selector, document);
+    Object.setPrototypeOf( $, jQuery );
     const bodyID = $('body').attr('id');
-    const parentBodyID = $Parent('body').attr('id');
+    const parentBodyID = jQuery('body').attr('id');
     const el = document.querySelector('code');
     $('code').html(`bodyID: <b>${bodyID}</b><br>parentBodyID: <b>${parentBodyID}</b>`);
   </script>
