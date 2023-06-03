@@ -9,11 +9,11 @@
   <code class="result"></code>
   <script>
     const $ = (selector) => window.parent.$(selector, document);
-    const theId = $("body").attr("id");
-    const theIdithContext = $('body').attr("id");
+	 const $Parent = window.parent.$;
+    const bodyID = $('body').attr('id');
+    const parentBodyID = $Parent('body').attr('id');
     const el = document.querySelector('code');
-    el.innerHTML +=('$("body").attr("id"): <b>' + theId + '</b><br><br>');
-    el.innerHTML +=('$"body", document).attr("id"): <b>' + theIdithContext + '</b>');
+    $('code').html(`bodyID: <b>${bodyID}</b><br>parentBodyID: <b>${parentBodyID}</b>`);
   </script>
 </body>
 </html>
