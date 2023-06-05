@@ -11,7 +11,7 @@
     const jQuery = window.parent.$;
     const $ = (selector) => jQuery(selector, document);
     Object.setPrototypeOf( $, jQuery );
-    const bodyID = $('body').attr('id');
+    const bodyID = $('body').first().closest('html').find('body').attr('id');
     const parentBodyID = jQuery('body').attr('id');
     const el = document.querySelector('code');
     $('code').html(`bodyID: <b>${bodyID}</b><br>parentBodyID: <b>${parentBodyID}</b>`);
