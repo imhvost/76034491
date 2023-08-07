@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>76847170</title>
+  <meta name="viewport" content="width=1200">
+  <style>
+    *{
+	padding:0;
+	margin:0;
+	box-sizing:border-box;
+}
+
+body{
+	font-family:sans-serif;
+	font-size: 13px;
+}
+
+.slider {
+  position: relative;
+  height: 40px;
+  background: #000;
+  color: #fff;
+  font-size: 13px;
+  overflow: hidden;
+}
+
+.slider:hover .slide {
+  animation-play-state: paused;
+}
+
+.slide {
+  position: absolute;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 10px;
+}
+
+.css-slider-generator{
+	display:grid;
+	grid-template-columns:1fr 1fr;
+	grid-gap:24px;
+	padding:0 20px 20px;
+	align-items:start;
+}
+
+.css-slider-generator-cell{
+	display:grid;
+	grid-gap:20px;
+}
+
+.css-slider-generator fieldset{
+	display:grid;
+	grid-gap:20px;
+	padding:16px;
+}
+.css-slider-generator label {
+	display:grid;
+	grid-gap:12px;
+}
+
+.css-slider-generator input{
+	height:36px;
+	padding:0 12px;
+	font-size:13px;
+}
+
+.css-slider-generator textarea{
+	padding:8px 12px;
+	font-size:13px;
+}
+
+.css-slider-generator button{
+	height:40px;
+	cursor:pointer;
+}
+
+h1{
+	margin:20px 20px 0;
+	text-align:center;
+}
+.stackoverflow-link{
+		margin:0 20px 20px;
+		text-align:center;
+	
+}
+h3,
+pre{
+	margin-bottom:20px;
+}
+
+code,
+pre{
+	padding:4px 8px;
+	background-color:#eee;
+}
+  </style>
+      
+</head>
+<body>
+<h1>CSS Infinite Loop Slider Generator</h1>
+<p class="stackoverflow-link"><a href="https://stackoverflow.com/questions/76847170/css-text-slideshow-after-second-slide-all-slides-merge-how-to-fix/76850523#76850523" target="_blank">https://stackoverflow.com/questions/76847170/css-text-slideshow-after-second-slide-all-slides-merge-how-to-fix/76850523#76850523</a></p>
+<form action="?" class="css-slider-generator">
+	<div class="css-slider-generator-cell">
+		<fieldset>
+		<legend>Config</legend>
+		<label>
+			<span>Animation Duration</span>
+			<input name="animationDuration" type="number" value="6" min="0" required>
+		</label>
+		<label>
+			<span>Slides Count</span>
+			<input name="slidesCount" type="number" value="4" min="1" required>
+		</label>
+		<label>
+			<span>Transition Keyframe Percent</span>
+			<input name="transitionKeyframePercent" type="number" value="20" max="50" required>
+		</label>
+	</fieldset>
+	<fieldset>
+		<legend>
+			Transition
+			<br>
+			<small>*from new line in format <code>name: value</code></small>
+		</legend>
+		<label>
+			<span>Start</span>
+<textarea name="propsHiddenStart" rows="5" required>
+opacity: 0
+transform: translateX(-5%)
+</textarea>
+		</label>
+		<label>
+			<span>Visible</span>
+<textarea name="propsVisible" rows="5" required>
+opacity: 1
+transform: translateX(0)
+</textarea>
+		</label>
+		<label>
+			<span>End</span>
+<textarea name="propsHiddenEnd" rows="5" required>
+opacity: 0
+transform: translateX(5%)
+</textarea>
+		</label>
+	</fieldset>
+	<button>Generate</button>
+	</div>
+	<div class="css-slider-generator-cell">
+	<div>
+	<h3>Result:</h3>
+<style class="slider-style"></style>
+<div class="slider"></div>
+	</div>
+	<div>
+		<h3>CSS</h3>
+<pre>.slider {
+  position: relative;
+  height: 40px;
+  background: #000;
+  color: #fff;
+  font-size: 13px;
+  overflow: hidden;
+}
+
+.slider:hover .slide {
+  animation-play-state: paused;
+}
+
+.slide {
+  position: absolute;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 10px;
+}</pre>
+		<label>
+			<span> + Keyframes CSS Output:</span>
+			<textarea name="output" rows="16"></textarea>
+		</label>
+		</div>
+	</div>
+</form>
+
+<script>const form = document.querySelector('.css-slider-generator');
+
+generate();
+
+form.onsubmit = event => {
+	event.preventDefault();
+	generate();
+}
+
+function generate(){
+	
+	const animationDuration = form.querySelector('[name="animationDuration"]').value || 6;
+	const transitionKeyframePercent = form.querySelector('[name="transitionKeyframePercent"]').value || 20;
+	let slidesCount = form.querySelector('[name="slidesCount"]').value || 4;
+	let propsHiddenStart = {};
+	let propsVisible = {};
+	let propsHiddenEnd = {};
+	let propsHiddenStartValue = form.querySelector('[name="propsHiddenStart"]').value.trim();
+	let propsVisibleValue = form.querySelector('[name="propsVisible"]').value.trim();
+	let propsHiddenEndValue = form.querySelector('[name="propsHiddenEnd"]').value.trim();
+	if(propsHiddenStartValue){
+		propsHiddenStartValue.split('\n').forEach(prop => {
+			const [key, value] = prop.split(':');
+			propsHiddenStart[key.trim()] = value.trim();
+		})
+	}
+	if(propsVisibleValue){
+		propsVisibleValue.split('\n').forEach(prop => {
+			const [key, value] = prop.split(':');
+			propsVisible[key.trim()] = value.trim();
+		})
+	}
+	if(propsHiddenEndValue){
+		propsHiddenEndValue.split('\n').forEach(prop => {
+			const [key, value] = prop.split(':');
+			propsHiddenEnd[key.trim()] = value.trim();
+		})
+	}
+	if(!Object.keys(propsHiddenStart).length){
+		propsHiddenStart = {
+			opacity: 0,
+			transform: 'translateX(-5%)'
+		}
+	}
+	if(!Object.keys(propsVisible).length){
+		propsVisible = {
+			opacity: 1,
+			transform: 'translateX(0)'
+		}
+	}
+	if(!Object.keys(propsHiddenEnd).length){
+		propsHiddenEnd = {
+			opacity: 0,
+		transform: 'translateX(5%)'
+		}
+	}
+	
+	const keyframes = [];
+	const keyframePercent = 100 / slidesCount;
+	let keyframeStartPercent = 0;
+	let keyframeEndPercent = keyframePercent;
+	const transitionPercent = transitionKeyframePercent * (keyframeEndPercent - keyframeStartPercent) / 100;
+	
+	let slider = '';
+	let index = 1;
+
+	while(slidesCount){
+		const visiblePercentStart = keyframeStartPercent + transitionPercent;
+		const visiblePercentEnd = keyframeEndPercent - transitionPercent;
+		keyframes.push({
+			[keyframeStartPercent + '%']: propsHiddenStart,
+			[visiblePercentStart + '%, ' + visiblePercentEnd + '%']: propsVisible,
+			[keyframeEndPercent + '%']: propsHiddenEnd,
+		});
+		keyframeStartPercent += keyframePercent;
+		keyframeEndPercent += keyframePercent;
+		slider += `<p class="slide"><b>${index}.</b>&nbsp;Lorem ipsum dolor sit amet, consectetur.</p>`;
+		index++;
+		slidesCount--;
+	}
+
+	let cssOutput = '';
+	keyframes.map((el, index) => {
+		const css = Object.entries(el).map(([key, value]) => {
+		  const properties = Object.entries(value).map(([property, val]) => {
+			 return `${property}: ${val};`;
+		  }).join(' ');
+		  
+		  return `${key} { ${properties} }`;
+		}).join('\n  ');
+		cssOutput += `
+.slide:nth-child(${index + 1}) {
+  animation: slide${index + 1} ${animationDuration}s infinite;
+}
+@keyframes slide${index + 1} {
+  ${css}
+}
+		`
+	})
+	form.querySelector('[name="output"]').value = cssOutput;
+	
+	form.querySelector('.slider-style').innerHTML = cssOutput;
+	form.querySelector('.slider').innerHTML = slider;
+}
+
+
+
+</script>
+</body>
+</html>
