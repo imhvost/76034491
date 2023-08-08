@@ -30,7 +30,6 @@ body{
 
 .slide {
   position: absolute;
-  opacity: 0;
   left: 0;
   top: 0;
   white-space: nowrap;
@@ -131,22 +130,19 @@ pre{
 		<label>
 			<span>Start</span>
 <textarea name="propsHiddenStart" rows="5" required>
-opacity: 0
-transform: translateX(-5%)
+clip-path: polygon(0 0, 0 0, 0 100%, 0 100%)
 </textarea>
 		</label>
 		<label>
 			<span>Visible</span>
 <textarea name="propsVisible" rows="5" required>
-opacity: 1
-transform: translateX(0)
+clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%)
 </textarea>
 		</label>
 		<label>
 			<span>End</span>
 <textarea name="propsHiddenEnd" rows="5" required>
-opacity: 0
-transform: translateX(5%)
+clip-path: polygon(100% 0, 100% 100%, 100% 100%, 100% 100%)
 </textarea>
 		</label>
 	</fieldset>
@@ -175,7 +171,6 @@ transform: translateX(5%)
 
 .slide {
   position: absolute;
-  opacity: 0;
   left: 0;
   top: 0;
   white-space: nowrap;
@@ -233,20 +228,17 @@ function generate(){
 	}
 	if(!Object.keys(propsHiddenStart).length){
 		propsHiddenStart = {
-			opacity: 0,
-			transform: 'translateX(-5%)'
+			'clip-path': 'polygon(0 0, 0 0, 0 100%, 0 100%)'
 		}
 	}
 	if(!Object.keys(propsVisible).length){
 		propsVisible = {
-			opacity: 1,
-			transform: 'translateX(0)'
+			'clip-path': 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
 		}
 	}
 	if(!Object.keys(propsHiddenEnd).length){
 		propsHiddenEnd = {
-			opacity: 0,
-		transform: 'translateX(5%)'
+			'clip-path': 'polygon(100% 0, 100% 100%, 100% 100%, 100% 100%)'
 		}
 	}
 	
@@ -262,10 +254,12 @@ function generate(){
 	while(slidesCount){
 		const visiblePercentStart = keyframeStartPercent + transitionPercent;
 		const visiblePercentEnd = keyframeEndPercent - transitionPercent;
+		const start = keyframeStartPercent === 0 ? '' : '0%, ';
+		const end = keyframeEndPercent === 100 ? '' : ', 100%';
 		keyframes.push({
-			[keyframeStartPercent + '%']: propsHiddenStart,
+			[start + keyframeStartPercent + '%']: propsHiddenStart,
 			[visiblePercentStart + '%, ' + visiblePercentEnd + '%']: propsVisible,
-			[keyframeEndPercent + '%']: propsHiddenEnd,
+			[keyframeEndPercent + '%' + end]: propsHiddenEnd,
 		});
 		keyframeStartPercent += keyframePercent;
 		keyframeEndPercent += keyframePercent;
@@ -273,8 +267,11 @@ function generate(){
 		index++;
 		slidesCount--;
 	}
-
-	let cssOutput = '';
+	
+	
+	let cssOutput = ``;
+	
+	propsHiddenStart
 	keyframes.map((el, index) => {
 		const css = Object.entries(el).map(([key, value]) => {
 		  const properties = Object.entries(value).map(([property, val]) => {
