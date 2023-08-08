@@ -129,6 +129,9 @@ pre{
 		</legend>
 		<label>
 			<span>Start</span>
+<!-- <textarea name="propsHiddenStart" rows="5" required> -->
+<!-- clip-path: polygon(0 0, 0 0, 0 100%, 0 100%) -->
+<!-- </textarea> -->
 <textarea name="propsHiddenStart" rows="5" required>
 opacity: 0
 transform: translateX(-5%)
@@ -136,15 +139,21 @@ transform: translateX(-5%)
 		</label>
 		<label>
 			<span>Visible</span>
+<!-- <textarea name="propsVisible" rows="5" required> -->
+<!-- clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) -->
+<!-- </textarea> -->
 <textarea name="propsVisible" rows="5" required>
-opacity: 1,
+opacity: 1
 transform: translateX(0)
 </textarea>
 		</label>
 		<label>
 			<span>End</span>
+<!-- <textarea name="propsHiddenEnd" rows="5" required> -->
+<!-- clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%) -->
+<!-- </textarea> -->
 <textarea name="propsHiddenEnd" rows="5" required>
-opacity: 0,
+opacity: 0
 transform: translateX(5%)
 </textarea>
 		</label>
@@ -231,20 +240,17 @@ function generate(){
 	}
 	if(!Object.keys(propsHiddenStart).length){
 		propsHiddenStart = {
-			opacity: 0,
-			transform: 'translateX(-5%)'
+			'clip-path': 'polygon(0 0, 0 0, 0 100%, 0 100%)'
 		}
 	}
 	if(!Object.keys(propsVisible).length){
 		propsVisible = {
-			opacity: 1,
-			transform: 'translateX(0)'
+			'clip-path': 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
 		}
 	}
 	if(!Object.keys(propsHiddenEnd).length){
 		propsHiddenEnd = {
-			opacity: 0,
-			transform: 'translateX(5%)'
+			'clip-path': 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)'
 		}
 	}
 	
