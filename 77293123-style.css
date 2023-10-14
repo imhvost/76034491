@@ -1,3 +1,3 @@
 :root {
-    --customImg: "https://picsum.photos/200/200";
+    --customImg: url('https://picsum.photos/200/200');
 }
