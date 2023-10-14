@@ -1,0 +1,5 @@
+@import '77293123-style.css';
+
+body {
+  background-image: var(--customImg);
+}
